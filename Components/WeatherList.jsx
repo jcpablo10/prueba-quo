@@ -18,6 +18,11 @@ const WeatherList = () => {
             let editDataCities = JSON.parse(localData)
             
             editDataCities.push(data)
+            // delete duplicated items
+            editDataCities = editDataCities.map(JSON.stringify).reverse() 
+            .filter(function(item, index, arr){ return arr.indexOf(item, index + 1) === -1; }) 
+            .reverse().map(JSON.parse) 
+
             console.log(editDataCities)
             localStorage.clear()
             localStorage.setItem('dataCities', JSON.stringify(editDataCities))
@@ -32,14 +37,13 @@ const WeatherList = () => {
     useEffect(() => {
         fetch('https://api.openweathermap.org/data/2.5/find?lat=19.4978&lon=-99.1269&cnt=20&units=metric&appid=7cbd0d28fe3bf4ce8c15e0a8865f8a10')
         .then(response => response.json())
-        .then(data => {
-            
+        .then(data => {   
             setCities(data.list)
         })
     }, [])
 
     return (
-        <ul>
+        <ul className="weather__list">
             {
                 cities.map((city) => (
                     <li key={city.id}>

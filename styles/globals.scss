@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body,html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+h1, h2, h3 {
+    text-align: center;
+}
+ul {
+    padding-left: 0;
+    // border: 1px solid red;
+    display: flex;
+    list-style-type: none;
+    justify-content: space-around;
+    li {
+        padding: 1em;
+    }
+}
+a,button {
+    color: darkblue;
+    text-transform: uppercase;
+    transition: .3s all;
+    text-decoration: none;
+    
+}
+button {
+    @extend a;
+    background-color: white;
+    border: 1px solid #e5e5e5;
+    padding: 1em;
+}
+a:hover {
+    color: lightseagreen;
+    transition: .3s all;
+}
+a:active, button:active {
+    transform: scale(.6);
+}
+nav {
+    box-shadow: 0px 11px 16px 6px rgba(0,0,0,.11)
+}
+.weather__list, .favorites__list {
+    @extend ul;
+    display: flex;
+    flex-flow: column;
+    grid-template-columns: 1fr 1fr;
+    li {
+        display: grid;
+        grid-template-columns: 1fr 1fr 200px;
+        border-bottom: 1px solid #e5e5e5;
+        width: 100%;
+    }
+}

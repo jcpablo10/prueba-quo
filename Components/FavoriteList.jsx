@@ -3,29 +3,38 @@ import React, { useState } from 'react'
 
 const FavoriteList = () => {
 
-    const deleteFavorite = (id) => {
-        console.log(cities)
-    }
+    let localFavorites = JSON.parse(localStorage.getItem('dataCities'))
+    let [cities, setFavorite] = useState(localFavorites)
+
     
-    const localFavorites = JSON.parse(localStorage.getItem('dataCities'))
+    const deleteFavorite = (id) => {
 
-    console.log(localFavorites)
+        for (let index = 0; index < cities.length; index++) {
+            
+            if (cities[index].id === id) {
+                cities.splice(index,1)
+            }
+        }  
 
-    let [cities, setCities] = useState(localFavorites)
+        localStorage.clear()
+        localFavorites = localStorage.setItem('dataCities', JSON.stringify(cities))
+        setFavorite(JSON.parse(localStorage.getItem('dataCities')))
+        
+    }
 
     return (
-        <ul>
+        <ul className="favorites__list">
             {
-                cities === null
+                !cities 
                 ? 'No hay información'
                 : (
                      cities.map((city) => (
-                        <li key={city.key}>
+                        <li key={city.id}>
                             <div>
                             {city.name}
                             </div>
                             <div>
-                                <button onClick={()=> {deleteFavorite(city.id)}}>x</button>
+                                <button onClick={() => deleteFavorite(city.id)}>x</button>
                             </div>
                         </li>
                     )) 

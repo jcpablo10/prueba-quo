@@ -6,7 +6,7 @@ const weather = () => {
     return (
         <Layout>
             <div>
-                Wheather
+                <h1>Wheather List</h1>
             </div>
             <WeatherList />
         </Layout>
